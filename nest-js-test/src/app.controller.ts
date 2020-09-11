@@ -2,10 +2,14 @@ import { Controller, Get, Param, Query, UseGuards, Request, Post } from '@nestjs
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalAuthGuard } from './passport/auth/local-auth.guard';
+import { AuthService } from './passport/auth/auth.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private authService: AuthService
+    ) {}
 
   @Get()
   getHello(): string {
@@ -16,7 +20,7 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post("/pass")
   login(@Request() req){
-    return req.user;
+    return this.authService.login(req.user);
   }
 
   @Get("/params/:param")
