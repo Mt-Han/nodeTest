@@ -8,6 +8,7 @@ import { UserController } from './controller/user.controller';
 import { UserService } from './service/user.service';
 import { UserRepository } from './model/repository/userRepository';
 import { AuthModule } from './passport/auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -15,11 +16,11 @@ import { AuthModule } from './passport/auth/auth.module';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'password',
-    database: 'nest_db',
+    password: '',
+    database: 'nest',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
-  }),
+  }),PassportModule.register({defaultStrategy: 'jwt' }),
   TypeOrmModule.forFeature([UserRepository])
   ,AuthModule],
   controllers: [AppController,UserController],
