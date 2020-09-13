@@ -1,9 +1,6 @@
 import { Controller, Get, Param, Query, UseGuards, Request, Post, Body } from '@nestjs/common';
-import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
-import { LocalAuthGuard } from './passport/auth/local-auth.guard';
-// import { AuthService } from './passport/auth/auth.service';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { User } from './user/model/user.entity';
 
@@ -26,6 +23,7 @@ export class AppController {
     return this.authService.login(user);
   }
 
+  @UseGuards(AuthGuard('admin'))
   @Get("/params/:param")
   getParam(
     @Param('param') param:string,
