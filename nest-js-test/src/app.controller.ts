@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Query, UseGuards, Request, Post } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards, Request, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalAuthGuard } from './passport/auth/local-auth.guard';
-import { AuthService } from './passport/auth/auth.service';
-import { JwtAuthGuard } from './passport/auth/jwt-auth.guard';
+// import { AuthService } from './passport/auth/auth.service';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { AuthService } from './auth/auth.service';
+import { User } from './user/model/user.entity';
 
 @Controller()
 export class AppController {
@@ -11,23 +13,17 @@ export class AppController {
     private readonly appService: AppService,
     private authService: AuthService
     ) {}
-
+    
   @Get()
-  getHello(): string {
+  getHello() {
     return this.appService.getHello();
   }
 
-  // @UseGuards(AuthGuard('local'))
-  @UseGuards(AuthGuard())
-  @Post("/pass")
-  login(@Request() req){
-    return this.authService.login(req.user);
-  }
-
-  @UseGuards(AuthGuard())
-  @Get('/profile')
-  getProfile(@Request() req) {
-    return req.user;
+  @Post("/login")
+  login(
+    @Body() user:User
+  ){
+    return this.authService.login(user);
   }
 
   @Get("/params/:param")

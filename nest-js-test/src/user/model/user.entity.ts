@@ -21,6 +21,9 @@ export class User{
   
     @Column({ length: 40, unique: true })
     email: string
+
+    @Column({ length: 12 })
+    role: string;
     
     /**
      * Active Record

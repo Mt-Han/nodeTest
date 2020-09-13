@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './model/user.entity';
+import { User } from './user/model/user.entity';
 
 
 
 @Injectable()
 export class AppService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>
+    // @InjectRepository(User)
+    // private readonly userRepository: Repository<User>
   ) {}
   getHello(): string {
     return 'Hello World! (GetController)';
