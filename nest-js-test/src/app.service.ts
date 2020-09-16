@@ -13,6 +13,11 @@ export class AppService {
   getParamQuery(str1:string,str2:string): string {
     return `Param: ${str1}, Query:${str2} (GetController)`;
   }
+
+  findOne(id){
+    id="1t";
+    return id;
+  }
   // getTest():string{
   //   return "Hi i'm test";
   // }

@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Query, UseGuards, Request, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards, Request, Post, Body, HttpStatus, HttpException, UseFilters, ParseIntPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from '@nestjs/passport';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { User } from './user/model/user.entity';
+import { CustomException } from './exceoption/custom-exceoption';
+import { HttpExceptionFilter } from './exceoption/http-exception.filter';
 
 
 @Controller()
@@ -30,9 +32,26 @@ export class AppController {
   @UseGuards(AuthGuard('admin'))
   @Get("/params/:param")
   getParam(
-    @Param('param') param:string,
-    @Query('query') query:string
+    @Request() req
+    // @Param('param') param:string,
+    // @Query('query') query:string
   ): string {
-    return this.appService.getParamQuery(param,query);
+    return this.appService.getParamQuery(req.params['param'],req.query['query']);
+    // return this.appService.getParamQuery(req.param,req.query);
+  }
+
+  @Get("/exception")
+  @UseFilters(new HttpExceptionFilter())
+  exception(){
+    throw new HttpException("1",HttpStatus.BAD_REQUEST);
+    return "test";
+  }
+
+  @Get("pipe/:id")
+  pipeTest(
+    @Param('id',ParseIntPipe) id:number
+  ){
+    id=this.appService.findOne(id);
+    return id;
   }
 }

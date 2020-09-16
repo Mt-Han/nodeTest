@@ -24,7 +24,8 @@ export class User{
 
     @Column({ length: 12 })
     role: string;
-    
+
+
     /**
      * Active Record
      * 사용이 간편

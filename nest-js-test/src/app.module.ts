@@ -10,7 +10,7 @@ import { DatabaseConstants } from './config/DBConstants';
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
     host: DatabaseConstants.DB_HOST,
-    port: 3306,
+    port: DatabaseConstants.DB_PORT,
     username: DatabaseConstants.DB_USER,
     password: DatabaseConstants.DB_PASSWORD,
     database: DatabaseConstants.DB_DATABASE,

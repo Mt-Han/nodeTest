@@ -4,18 +4,19 @@ import { User } from './model/user.entity';
 import { UserService } from './service/user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
 @Controller("/user")
 export class UserController {
   constructor(
     private readonly userService: UserService,
     ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get("/list")
   getTest(): Promise<User[]> {
     return this.userService.getAllUser();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get("/repo")
   findEmail(
     @Query("email") email:string
@@ -30,6 +31,7 @@ export class UserController {
     return this.userService.insertUser(body);
   }
   
+  @UseGuards(JwtAuthGuard)
   @Put("/update")
   updateUser(
     @Body() body
@@ -37,6 +39,7 @@ export class UserController {
     return this.userService.updateUser(body);
   }
   
+  @UseGuards(JwtAuthGuard)
   @Delete("/delete")
   deleteUser(
     @Body() body
