@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseConstants } from './config/DBConstants';
+import { PipetestModule } from './pipetest/pipetest.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -19,6 +20,7 @@ import { DatabaseConstants } from './config/DBConstants';
   }),
    AuthModule,
    ConfigModule.forRoot(),
+   PipetestModule,
    ],
   controllers: [AppController],
   providers: [AppService],
