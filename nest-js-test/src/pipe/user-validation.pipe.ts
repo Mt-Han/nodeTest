@@ -1,10 +1,9 @@
 import { ArgumentMetadata, Injectable, PipeTransform, BadRequestException } from '@nestjs/common';
-import { ObjectSchema } from '@hapi/joi';
-import { validate } from 'class-validator';
-import { plainToClass } from 'class-transformer';
- 
+import {plainToClass} from 'class-transformer';
+import {validate} from 'class-validator';
+
 @Injectable()
-export class TestValidationPipe implements PipeTransform {
+export class UserValidationPipe implements PipeTransform {
   async transform(value: any, { metatype }: ArgumentMetadata) {
     if (!metatype || !this.toValidate(metatype)) {
       return value;
@@ -12,7 +11,7 @@ export class TestValidationPipe implements PipeTransform {
     const object = plainToClass(metatype, value);
     const errors = await validate(object);
     if (errors.length > 0) {
-      throw new BadRequestException('Validation failed');
+      throw new BadRequestException('Custom Validation failed');
     }
     return value;
   }

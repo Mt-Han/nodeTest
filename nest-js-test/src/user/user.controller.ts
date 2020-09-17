@@ -3,6 +3,8 @@ import { Controller, Get, Post, Query, Body, Put, Delete, UseGuards, Request } f
 import { User } from './model/user.entity';
 import { UserService } from './service/user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UserValidationPipe } from 'src/pipe/user-validation.pipe';
+import { UserDto } from './dto/user.dto';
 
 @Controller("/user")
 export class UserController {
@@ -26,8 +28,8 @@ export class UserController {
   
   @Post("/insert")
   insertUser(
-    @Body() body
-  ): Promise<User>{
+    @Body(new UserValidationPipe()) body:UserDto
+  ): Promise<UserDto>{
     return this.userService.insertUser(body);
   }
   

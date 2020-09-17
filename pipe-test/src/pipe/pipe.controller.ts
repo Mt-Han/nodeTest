@@ -1,10 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe, HttpStatus, UsePipes, Body, Post } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, HttpStatus, UsePipes, Body, Post, ValidationPipe } from '@nestjs/common';
 import { UserClass } from './user.dto';
+import { TestValidationPipe } from './validation.pipe';
 
 @Controller('pipe')
 export class PipeController {
     @Post()
-    getPipe(@Body() id:UserClass){
+    getPipe(@Body(new TestValidationPipe()) id:UserClass){
         return id;
     }
 }
