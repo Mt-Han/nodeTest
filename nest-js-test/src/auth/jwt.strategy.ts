@@ -15,7 +15,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any){
+  async validate(payload: any,done){
+    console.log(done);
     if (!payload){
       throw new UnauthorizedException();
     }        

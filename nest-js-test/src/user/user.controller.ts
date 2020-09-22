@@ -25,7 +25,7 @@ export class UserController {
   ): Promise<User[]>{
     return this.userService.findByEmail(email);
   }
-  
+    
   @Post("/insert")
   insertUser(
     @Body(new UserValidationPipe()) body:UserDto
@@ -48,5 +48,7 @@ export class UserController {
   ): Promise<any>{
     return this.userService.deleteUser(body);
   }
+
+
 
 }

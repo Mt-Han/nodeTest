@@ -54,4 +54,10 @@ export class AppController {
     id=this.appService.findOne(id);
     return id;
   }
+
+  @Post("/post")
+  postTest(){
+    console.log("11");
+    return "test";
+  }
 }
