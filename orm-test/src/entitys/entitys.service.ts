@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Role } from './entity/role.entity';
+import { Role } from './entity/account_role.entity';
+
 
 
 @Injectable()
@@ -11,9 +12,9 @@ export class EntitysService {
         private readonly roleRepository: Repository<Role>
     ){}
 
-    async test(){
-        const role= new Role();
+    async test(role: Role){
         role.CREATE_USER="test";
+        console.log(role);
         this.roleRepository.save(role);
     }
 }

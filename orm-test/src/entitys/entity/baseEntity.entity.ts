@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Role } from './role.entity';
+import { Role } from './account_role.entity';
 import { type } from 'os';
 
-export class BaseDt {
+export class BaseEntity {
 
   @CreateDateColumn({ comment: "생성일자" })
   CREATE_DATE: Date;

@@ -1,6 +1,7 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EntitysService } from './entitys/entitys.service';
+import { Role } from './entitys/entity/account_role.entity';
 
 @Controller()
 export class AppController {
@@ -16,7 +17,9 @@ export class AppController {
 
   @Post()
   post(): string {
-    this.entityService.test();
+    const role = new Role();
+    // role.ROLE_NAME="testname";
+    this.entityService.test(role);
     return "success";
   }
 }

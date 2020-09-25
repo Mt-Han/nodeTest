@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne, Index } from 'typeorm';
-import { BaseDt } from './baseDt.entity';
-import { Role } from './role.entity';
+import { BaseEntity } from './baseEntity.entity';
+import { Role } from './account_role.entity';
 
 
 @Entity({
-  name: 'RoleStaff',
+  name: 'ACCOUNT_STAFF_ROLE_TB',
 })
-export class RoleStaff extends BaseDt {
+export class RoleStaff extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "bigint" })
   ROLE_STAFF_SEQ: number;
 

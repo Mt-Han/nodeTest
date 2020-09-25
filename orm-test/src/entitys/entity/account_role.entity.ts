@@ -1,13 +1,13 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
-import { BaseDt } from './baseDt.entity';
+import { BaseEntity } from './baseEntity.entity';
 import { type } from 'os';
-import { RoleStaff } from './roleStaff.entity';
+import { RoleStaff } from './account_staff_role.entity';
 
 
 @Entity({
-  name: 'Role',
+  name: 'ACCOUNT_ROLE_TB',
 })
-export class Role extends BaseDt {
+export class Role extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "bigint" })
   ROLE_SEQ: number;
 
@@ -24,7 +24,7 @@ export class Role extends BaseDt {
   // UPDATE_USER: string;
 
   @Column({ length: 255 })
-  ROLE_NAME: string;
+  ROLE_NAME: string = null;
 
   @Column({ length: 100 })
   ROLE_CODE: string;
